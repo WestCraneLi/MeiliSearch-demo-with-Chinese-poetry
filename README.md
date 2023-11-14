@@ -4,9 +4,9 @@
 
 ## 数据集介绍
 
-来源：[poems-db](https://github.com/yxcs/poems-db.git)
+来源：[chinese-poetry](https://github.com/chinese-poetry/chinese-poetry)
 
-内容：包含诗词基本内容
+内容：抓取了唐诗数据
 
 ## MeiliSearch介绍
 
@@ -25,3 +25,4 @@ npm run start
 * [MeiliSearch食用指南](https://juejin.cn/post/7161361328513220621)
 * [MeiliSearch](https://www.meilisearch.com/)
 * [poems-db](https://github.com/yxcs/poems-db.git)
+* [chinese-poetry](https://github.com/chinese-poetry/chinese-poetry)
