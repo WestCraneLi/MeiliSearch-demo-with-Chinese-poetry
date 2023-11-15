@@ -2,6 +2,8 @@
 
 ![1699982098527](image/README/1699982098527.png)
 
+![1700067749280](image/README/1700067749280.png)
+
 ## 数据集介绍
 
 来源：[chinese-poetry](https://github.com/chinese-poetry/chinese-poetry)
@@ -16,8 +18,15 @@
 
 ## 快速开始
 
+默认你已经下载好了MeiliSearch，并且已经启动
+
 ```bash
+npm install
 npm run start
+
+cd web
+pnpm install
+npm run dev
 ```
 
 ## 参考

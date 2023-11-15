@@ -10,6 +10,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "meilisearch": "^0.35.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },
