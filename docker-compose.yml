@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  meilisearch:
+    container_name: poetry-meilisearch
+    image: getmeili/meilisearch:v1.4
+    ports:
+      - 7700:7700
+    volumes:
+      - /meilisearchData/poetry
