@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+  <title>百度搜索</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+ 
+    .search-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
+ 
+    .search-input {
+      width: 350px;
+      height: 30px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+ 
+    .search-btn {
+      margin-left: 10px;
+      padding: 5px 10px;
+      background-color: #4285f4;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+ 
+    .search-results {
+      margin-top: 30px;
+      list-style-type: none;
+      padding: 0;
+    }
+ 
+    .search-results li {
+      margin-bottom: 10px;
+    }
+  </style>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+ 
+<body>
+  <div id="app">
+    <div class="search-box">
+      <input class="search-input" type="text" v-model="keyword" @keyup.enter="search" placeholder="请输入关键字">
+      <button class="search-btn" @click="search">搜索</button>
+    </div>
+    <ul class="search-results">
+      <li v-for="result in results" :key="result.id">
+        <h3>{{ result.title }}</h3>
+        <p>{{ result.snippet }}</p>
+        <a :href="result.url">{{ result.url }}</a>
+      </li>
+    </ul>
+  </div>
+ 
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          keyword: '',
+          results: []
+        };
+      },
+      methods: {
+        search() {
+          // 模拟搜索请求，这里可以发起实际的搜索请求
+          setTimeout(() => {
+            this.results = [
+              {
+                id: 1,
+                title: 'Vue.js - 渐进式JavaScript框架',
+                snippet: 'Vue.js 是一套用于构建用户界面的渐进式 JavaScript 框架。',
+                url: 'https://cn.vuejs.org'
+              },
+              {
+                id: 2,
+                title: '百度百科- 全球最大中文百科全书',
+                snippet: '百度百科是一部内容开放、自由的网络百科全书',
+                url: 'https://baike.baidu.com'
+              },
+              {
+                id: 3,
+                title: '百度一下，你就知道',
+                snippet: '百度一下，你就知道！',
+                url: 'https://www.baidu.com'
+              }
+            ];
+          }, 500);
+        }
+      }
+    });
+ 
+    app.mount('#app');
+  </script>
+</body>
+ 
+</html>

@@ -1,0 +1,5 @@
+@import './base.css';
+
+mark, ::selection {
+    background-color: rgb(255, 219, 231);
+}
