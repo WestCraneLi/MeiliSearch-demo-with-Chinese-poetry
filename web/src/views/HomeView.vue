@@ -24,6 +24,7 @@
             v-model="searchText"
             style="width: 520px"
             @input="search"
+            @keyup="search"
           />
           <button color="#E41359" aria-label="clear" class="search-btn" @click="search">
             搜索
@@ -34,11 +35,11 @@
     <main>
       <div class="poetry-box" v-if="poetryList.length">
         <div class="poetry-item" v-for="item in poetryList" :key="item.id">
-          <div class="poetry-title">{{ item.title }}</div>
-          <div class="poetry-content">{{ item.paragraphs.join(' ') }}</div>
+          <div class="poetry-title" v-html="hightLight(item.title, searchText)"></div>
+          <div class="poetry-content" v-html="hightLight(item.paragraphList, searchText)"></div>
           <div class="poetry-author-tag">
-            <div class="poetry-author">作者：{{ item.author }}</div>
-            <div class="poetry-tag">{{ item.tags.join(' | ') }}</div>
+            <div class="poetry-author" v-html="hightLight(item.authorText, searchText)"></div>
+            <div class="poetry-tag" v-html="hightLight(item.tagList, searchText)"></div>
           </div>
         </div>
       </div>
@@ -53,7 +54,7 @@
 
 <script setup>
 import { MeiliSearch } from 'meilisearch'
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 const client = new MeiliSearch({
   host: 'http://localhost:7700',
   apiKey: 'DHTtAiD22UxgIKhQwpS-EH5IcledknXII3KvwjkjdYI'
@@ -66,6 +67,23 @@ const totalPages = ref(0)
 const processingTimeMs = ref(0)
 const searchText = ref('')
 const hasMore = ref(false)
+
+const hightLight = computed(() => {
+  return (text, query) => {
+    // const reg = new RegExp(query, 'gi')
+    // return text.replace(reg, (val) => {
+    //   return `<span style="color:red">${val}</span>`
+    // })
+    let highlightedText = text
+    for (let i = 0; i < query.length; i++) {
+      let regEx = new RegExp(query[i], 'gi')
+      highlightedText = highlightedText.replace(regEx, function (match) {
+        return '<span style="color:red">' + match + '</span>'
+      })
+    }
+    return highlightedText
+  }
+})
 
 const fetchData = async (str, page = 1) => {
   return new Promise((resolve, reject) => {
@@ -84,11 +102,16 @@ const fetchData = async (str, page = 1) => {
 
 const getData = async (str, page = 1) => {
   const data = await fetchData(str, page)
+  data.hits.forEach((item) => {
+    item.paragraphList = item.paragraphs.join(' ')
+    item.authorText = '作者：' + item.author
+    item.tagList = item.tags.join(' | ')
+  })
   return data
 }
 
 const showLoad = () => {
-  if(totalPages.value > page.value) {
+  if (totalPages.value > page.value) {
     hasMore.value = true
   } else {
     hasMore.value = false
