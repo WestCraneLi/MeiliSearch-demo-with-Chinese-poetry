@@ -19,6 +19,7 @@
 ## 快速开始
 
 ```bash
+# 方法一：用docker
 # 进入到根目录，启动docker，确保docker已在你的后台运行
 docker-compose up -d
 
@@ -27,7 +28,9 @@ docker-compose up -d
 # 进入到根目录下的 index.js文件下，将 apiKey 替换为你自己的 master-key
 # 进入到根目录下 web 文件夹下，找到 HomeView.vue 文件的apiKey，将 apiKey 替换为你自己的 master-key
 
-# 进入到根目录下
+# 方法二：下载MeiliSearch，终端启动MeiliSearch，复制它的master-key到项目中
+
+# 进入到项目根目录下
 
 # 添加数据库
 npm install
